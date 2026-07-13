@@ -1,0 +1,407 @@
+/* ============================================================
+   Relevo — design tokens
+   Reference points: Linear, Vercel dashboard. Restrained neutral
+   surfaces, one disciplined accent, real hierarchy. Depth comes
+   from layering and shadow, not motion.
+   ============================================================ */
+
+:root {
+  --bg: #FAFAF8;
+  --surface: #FFFFFF;
+  --surface-glass: rgba(255, 255, 255, 0.72);
+  --border: #E6E7E1;
+  --border-strong: #D3D5CC;
+
+  --ink: #1C1E1B;
+  --ink-soft: #6B7069;
+  --ink-faint: #9CA39B;
+
+  --accent: #D64933;
+  --accent-hover: #BD3D29;
+  --accent-wash: #FBEAE6;
+
+  --teal: #2F6F62;
+  --teal-wash: #E4EEEC;
+  --gold: #A8791F;
+  --gold-wash: #F3EBD9;
+
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+
+  --shadow-sm: 0 1px 2px rgba(28, 30, 27, 0.04);
+  --shadow-md: 0 1px 2px rgba(28, 30, 27, 0.04), 0 8px 20px -14px rgba(28, 30, 27, 0.18);
+  --shadow-lg: 0 2px 4px rgba(28, 30, 27, 0.05), 0 14px 28px -16px rgba(28, 30, 27, 0.22);
+}
+
+* { box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+img { max-width: 100%; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  /* One static, very subtle wash — depth without motion. */
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% -10%, rgba(214, 73, 51, 0.05), transparent 45%),
+    radial-gradient(circle at 92% 0%, rgba(47, 111, 98, 0.04), transparent 40%);
+  background-attachment: fixed;
+}
+
+/* ---- Header ---- */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.wordmark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--ink);
+  flex-shrink: 0;
+}
+
+.wordmark-text {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.install-btn {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--ink-soft);
+  padding: 7px 13px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.install-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Stage / hero ---- */
+.stage {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 8px 24px 90px;
+}
+
+.query-panel {
+  padding: 44px 0 40px;
+}
+
+.query-panel h1 {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  line-height: 1.25;
+  margin: 0 0 10px;
+}
+
+.subhead {
+  font-size: 15px;
+  color: var(--ink-soft);
+  margin: 0 0 24px;
+  max-width: 50ch;
+  line-height: 1.5;
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+}
+
+#topic-input {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  color: var(--ink);
+  padding: 13px 16px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-family: var(--font-body);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+#topic-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-wash);
+}
+#topic-input::placeholder { color: var(--ink-faint); }
+
+#search-btn {
+  background: var(--accent);
+  color: #FFFFFF;
+  border: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: var(--shadow-sm);
+  transition: background 0.15s ease;
+}
+#search-btn:hover { background: var(--accent-hover); }
+#search-btn:disabled { opacity: 0.55; cursor: wait; }
+
+.status-line {
+  min-height: 20px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* ---- Empty state / scoring key ---- */
+.empty-state {
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+}
+
+.measure-key {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.measure-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.measure-swatch {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  margin-top: 4px;
+}
+
+.measure-item dt {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+.measure-item dd {
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ---- Results ---- */
+.results { padding-top: 8px; }
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.results-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+.results-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.results-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.result-card {
+  display: block;
+  background: var(--surface-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow-md);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.result-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.result-top {
+  display: flex;
+  gap: 12px;
+}
+
+.result-rank {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  padding-top: 2px;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.result-thumb {
+  width: 112px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: var(--border);
+}
+
+.result-body { min-width: 0; flex: 1; }
+
+.result-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 4px;
+  letter-spacing: -0.1px;
+}
+
+.result-channel {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin: 0 0 6px;
+}
+
+.result-reason {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---- Score bars: horizontal, labeled, compact.
+   Reads like a standard dashboard metric row (Linear/GitHub-style),
+   not a decorative meter. Cannot overflow — bar track is
+   percentage-based inside a fixed-width column. ---- */
+.score-bars {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: 66px 1fr 26px;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-name {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.score-track {
+  height: 5px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+.score-fill.is-filled { width: var(--fill, 0%); }
+.score-fill.relevance { background: var(--accent); }
+.score-fill.comments { background: var(--teal); }
+.score-fill.momentum { background: var(--gold); }
+
+.score-value {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px;
+}
+
+.offline-banner {
+  background: var(--gold-wash);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-card, .score-fill { transition: none; }
+}
+
+@media (max-width: 480px) {
+  .stage { padding: 8px 16px 90px; }
+  .query-panel { padding: 32px 0 32px; }
+  .query-panel h1 { font-size: 24px; }
+  .search-form { flex-direction: column; }
+  #search-btn { width: 100%; }
+  .result-thumb { width: 88px; height: 50px; }
+  .score-row { grid-template-columns: 58px 1fr 24px; gap: 8px; }
+}

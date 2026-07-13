@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relevo — find the video that actually teaches it</title>
+<meta name="description" content="Search YouTube by relevance to what you're trying to learn, not by views.">
+<meta name="theme-color" content="#FAFAF8">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wordmark">
+    <span class="logo-mark">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+        <path d="M8 5v14l11-7-11-7z" fill="#FFFFFF"/>
+      </svg>
+    </span>
+    <span class="wordmark-text">Relevo</span>
+  </div>
+  <button id="install-btn" class="install-btn" hidden>Install</button>
+</header>
+
+<main class="stage">
+  <section class="query-panel">
+    <h1>Find the video that actually teaches it</h1>
+    <p class="subhead">Search ranks by how well a video covers your topic, not by how many people watched it.</p>
+    <form id="search-form" class="search-form">
+      <input
+        id="topic-input"
+        type="text"
+        placeholder="e.g. VLOOKUP with multiple criteria in Excel"
+        autocomplete="off"
+        required
+      >
+      <button type="submit" id="search-btn">Search</button>
+    </form>
+    <p id="status-line" class="status-line" aria-live="polite"></p>
+  </section>
+
+  <section id="results" class="results" hidden>
+    <div class="results-header">
+      <h2 id="results-topic"></h2>
+      <span id="results-meta" class="results-meta"></span>
+    </div>
+    <ol id="results-list" class="results-list"></ol>
+  </section>
+
+  <section id="empty-state" class="empty-state">
+    <span class="section-label">How results are scored</span>
+    <div class="measure-key">
+      <div class="measure-item">
+        <span class="measure-swatch" style="background:var(--accent)"></span>
+        <div>
+          <dt>Relevance</dt>
+          <dd>Does the video actually teach the topic, not just mention it</dd>
+        </div>
+      </div>
+      <div class="measure-item">
+        <span class="measure-swatch" style="background:var(--teal)"></span>
+        <div>
+          <dt>Comment signal</dt>
+          <dd>Do real viewers confirm they understood it</dd>
+        </div>
+      </div>
+      <div class="measure-item">
+        <span class="measure-swatch" style="background:var(--gold)"></span>
+        <div>
+          <dt>Momentum</dt>
+          <dd>Views per day since publish, so recent quality isn't buried by old virality</dd>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span id="offline-banner" class="offline-banner" hidden>Offline — showing your last search.</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
