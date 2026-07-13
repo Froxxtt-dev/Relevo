@@ -29,8 +29,15 @@ import { YoutubeTranscript } from "youtube-transcript";
 // hiccup can't hang the whole request; cache failures always degrade
 // to "just do the search without caching" rather than breaking search.
 let redis = null;
+let warnedMissingRedis = false;
 function getRedis() {
-  if (!process.env.REDIS_URL) return null;
+  if (!process.env.REDIS_URL) {
+    if (!warnedMissingRedis) {
+      console.error("REDIS_URL is not set — caching is disabled for this deployment.");
+      warnedMissingRedis = true; // avoid spamming logs on every request
+    }
+    return null;
+  }
   if (!redis) {
     redis = new Redis(process.env.REDIS_URL, {
       maxRetriesPerRequest: 1,
