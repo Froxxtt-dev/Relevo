@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relevo. Find the video that actually teaches it</title>
+<title>Relevo — find the video that actually teaches it</title>
 <meta name="description" content="Search YouTube by relevance to what you're trying to learn, not by views.">
 <meta name="theme-color" content="#FAFAF8">
 <link rel="manifest" href="manifest.json">
@@ -43,6 +43,13 @@
       <button type="submit" id="search-btn">Search</button>
     </form>
     <p id="status-line" class="status-line" aria-live="polite"></p>
+    <div id="loading-steps" class="loading-steps" hidden aria-live="polite">
+      <div class="loading-step" data-step="0"><i class="step-icon" aria-hidden="true"></i><span>Finding candidate videos</span></div>
+      <div class="loading-step" data-step="1"><i class="step-icon" aria-hidden="true"></i><span>Ranking by relevance</span></div>
+      <div class="loading-step" data-step="2"><i class="step-icon" aria-hidden="true"></i><span>Reading comments and transcripts</span></div>
+      <div class="loading-step" data-step="3"><i class="step-icon" aria-hidden="true"></i><span>Scoring quality</span></div>
+      <p class="loading-note">Usually takes 10&ndash;20 seconds depending on the topic.</p>
+    </div>
   </section>
 
   <section id="results" class="results" hidden>
@@ -50,7 +57,17 @@
       <h2 id="results-topic"></h2>
       <span id="results-meta" class="results-meta"></span>
     </div>
+    <div class="filter-bar" role="group" aria-label="Sort results">
+      <button type="button" class="filter-chip is-active" data-sort="best">Best match</button>
+      <button type="button" class="filter-chip" data-sort="newest">Newest</button>
+      <button type="button" class="filter-chip" data-sort="popular">Most viewed</button>
+      <button type="button" class="filter-chip" data-sort="short">Shortest</button>
+    </div>
     <ol id="results-list" class="results-list"></ol>
+    <div id="no-results" class="no-results" hidden>
+      <p class="no-results-title">No videos matched that topic</p>
+      <p class="no-results-body">Try a broader phrase, or check the spelling.</p>
+    </div>
   </section>
 
   <section id="empty-state" class="empty-state">
