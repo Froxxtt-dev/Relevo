@@ -208,7 +208,7 @@ function renderCard(v, rank) {
       </div>
     </a>
     <button type="button" class="breakdown-toggle" aria-expanded="false">Show score breakdown <i class="chevron"></i></button>
-    <div class="score-bars" hidden>
+    <div class="score-bars">
       <div class="score-row">
         <span class="score-name">Relevance</span>
         <span class="score-track"><span class="score-fill relevance" data-fill="${v.semanticScore}"></span></span>
@@ -236,11 +236,11 @@ function renderCard(v, rank) {
   const toggle = wrapper.querySelector(".breakdown-toggle");
   const bars = wrapper.querySelector(".score-bars");
   toggle.addEventListener("click", () => {
-    const isOpen = !bars.hidden;
-    bars.hidden = isOpen;
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    toggle.classList.toggle("is-open", !isOpen);
-    if (!isOpen) {
+    const willOpen = !bars.classList.contains("is-open");
+    bars.classList.toggle("is-open", willOpen);
+    toggle.setAttribute("aria-expanded", String(willOpen));
+    toggle.classList.toggle("is-open", willOpen);
+    if (willOpen) {
       requestAnimationFrame(() => {
         bars.querySelectorAll(".score-fill").forEach((bar) => {
           bar.style.setProperty("--fill", `${bar.dataset.fill || 0}%`);
