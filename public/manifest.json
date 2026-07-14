@@ -1,5 +1,5 @@
 {
-  "name": "Relevo — YouTube learning finder",
+  "name": "Relevo. YouTube learning finder",
   "short_name": "Relevo",
   "description": "Search YouTube by relevance to what you're trying to learn, not by views.",
   "start_url": "./index.html",
