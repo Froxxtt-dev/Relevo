@@ -276,10 +276,13 @@ independent 0-100 scales:
    found it clear and accurate? Confused, misled, or "clickbait" complaints should lower this
    score. If comments are empty or uninformative, return 50 (neutral).
 
-Also write a one-sentence "reason" (max 20 words) explaining the semanticScore.
+Also provide:
+- "reason": one sentence (max 20 words) explaining the semanticScore.
+- "pro": the single strongest reason to watch this one (max 10 words, concrete — not generic praise).
+- "con": the single most honest caveat or limitation (max 10 words). If you truly see none, use "None obvious from available info".
 
 Return ONLY a JSON array, no prose, no markdown fences, in this exact shape:
-[{"idx":0,"semanticScore":87,"commentQuality":72,"reason":"..."}]`;
+[{"idx":0,"semanticScore":87,"commentQuality":72,"reason":"...","pro":"...","con":"..."}]`;
 
   const userPrompt = `TOPIC: ${topic}\n\nCANDIDATES:\n${JSON.stringify(compactList, null, 2)}`;
 
@@ -291,7 +294,7 @@ Return ONLY a JSON array, no prose, no markdown fences, in this exact shape:
     },
     body: JSON.stringify({
       model: GROQ_MODEL,
-      max_tokens: 2000,
+      max_tokens: 2400,
       temperature: 0.2,
       messages: [
         { role: "system", content: systemPrompt },
@@ -319,6 +322,8 @@ Return ONLY a JSON array, no prose, no markdown fences, in this exact shape:
       semanticScore: clamp(p.semanticScore),
       commentQuality: clamp(p.commentQuality),
       reason: p.reason || "",
+      pro: p.pro || "",
+      con: p.con || "",
     };
   });
 }
