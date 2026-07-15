@@ -503,16 +503,59 @@ body {
 /* ---- Progressive loading sequence ---- */
 .loading-steps {
   margin-top: 16px;
-  padding: 14px 16px;
+  padding: 20px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   max-width: 360px;
 }
+.network-graphic {
+  margin-bottom: 4px;
+}
+.net-rotate {
+  transform-origin: 60px 60px;
+  animation: spin-orb 18s linear infinite;
+}
+@keyframes spin-orb {
+  to { transform: rotate(360deg); }
+}
+.net-line {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+.net-node {
+  fill: var(--accent);
+  opacity: 0.75;
+}
+.net-center-glow {
+  fill: var(--accent-wash);
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
+.net-center {
+  fill: var(--accent);
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; r: 16; }
+  50% { opacity: 0.9; r: 19; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .net-center-glow { animation: none; }
+  .net-rotate { animation: none; }
+}
+.loading-headline {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+  align-self: flex-start;
+}
 .loading-step {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 9px;
