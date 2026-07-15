@@ -1,3 +1,11 @@
 {
-  "version": 2
+  "version": 2,
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ]
 }
