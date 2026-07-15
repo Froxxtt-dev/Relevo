@@ -502,6 +502,8 @@ body {
 
 /* ---- Progressive loading sequence ---- */
 .loading-steps {
+  position: relative;
+  z-index: 0;
   margin-top: 16px;
   padding: 20px 16px;
   background: var(--surface);
@@ -513,8 +515,24 @@ body {
   gap: 8px;
   max-width: 360px;
 }
+/* Soft blurred glow behind the whole card — cheap, static-friendly
+   depth cue rather than a literal moving background. */
+.loading-steps::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 28%, var(--accent-wash) 0%, transparent 68%);
+  filter: blur(28px);
+  pointer-events: none;
+}
 .network-graphic {
   margin-bottom: 4px;
+  animation: float-orb 6s ease-in-out infinite;
+}
+@keyframes float-orb {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }
 .net-rotate {
   transform-origin: 60px 60px;
@@ -546,6 +564,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .net-center-glow { animation: none; }
   .net-rotate { animation: none; }
+  .network-graphic { animation: none; }
 }
 .loading-headline {
   font-size: 14px;
@@ -578,7 +597,12 @@ body {
 .loading-step.is-active .step-icon {
   border-color: var(--accent);
   border-top-color: transparent;
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.7s linear infinite, pulse-halo 1.4s ease-in-out infinite;
+}
+@keyframes pulse-halo {
+  0% { box-shadow: 0 0 0 0 rgba(214, 73, 51, 0.35); }
+  70% { box-shadow: 0 0 0 6px rgba(214, 73, 51, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(214, 73, 51, 0); }
 }
 .loading-step.is-done { color: var(--teal); }
 .loading-step.is-done .step-icon {
