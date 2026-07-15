@@ -1,4 +1,4 @@
-const CACHE_NAME = "relevo-shell-v7";
+const CACHE_NAME = "relevo-shell-v9";
 const SHELL_ASSETS = [
   "./",
   "index.html",
@@ -27,33 +27,29 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Cache-first for the app shell, network-only for the /api/search calls
-// (search results should always be fresh — the app itself caches the last
-// result set in localStorage for offline viewing, see app.js).
+// Network-first for the app shell: always fetch the latest version when
+// online, updating the cache as we go. Cache is purely an offline
+// fallback now, not the default source — this is what actually fixes
+// "changes don't show up until incognito," since cache-first previously
+// meant a stale copy could win indefinitely once cached.
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
-  // Only cache plain http/https GET requests. Browser extensions inject
-  // requests with schemes like chrome-extension:// that Cache.put() rejects,
-  // and non-GET requests can't be cached at all.
   if (
     event.request.method !== "GET" ||
     !url.protocol.startsWith("http") ||
     url.pathname.startsWith("/api/")
   ) {
-    return; // let it hit the network / worker directly, untouched by the cache
+    return;
   }
 
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      return (
-        cached ||
-        fetch(event.request).then((response) => {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          return response;
-        })
-      );
-    })
+    fetch(event.request)
+      .then((response) => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
